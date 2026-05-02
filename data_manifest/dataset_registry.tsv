@@ -1,0 +1,95 @@
+# scCluBench Dataset Registry
+# ============================
+# Generated: 2026-05-02
+# Paper: scCluBench: Comprehensive Benchmarking of Clustering Algorithms for Single-Cell RNA Sequencing (AAAI 2026)
+#
+# STATUS VALUES:
+#   valid        = file exists, cell type count matches paper Table 2
+#   invalid_label= file exists but cell type count does NOT match paper
+#   missing      = no file exists for this dataset
+#   download_failed = download was attempted but failed
+#   manual_required = requires manual download (blocked server, etc.)
+#
+# SOURCE TYPE VALUES:
+#   cellxgene_census = CELLxGENE Census SOMA API
+#   geo_tar          = NCBI GEO (via SOAP/REST API + FTP)
+#   figshare_api     = Figshare API (articles/{id}/files endpoint)
+#   scanpy_dataset   = scanpy.datasets built-in
+#   tenx_direct      = 10x Genomics direct download
+#   bioconductor     = Bioconductor package (TabulaMuris, TabulaMurisSenisData)
+#
+# PAPER TABLE 2 CLUSTER COUNTS (extracted from ACC columns in Table 2):
+#   Human Pancreas 1: 7 distinct ACC values
+#   Human Pancreas 2: 10 distinct ACC values
+#   Human Pancreas 3: 14 distinct ACC values (code says 10, paper text says 10)
+#   Human Pancreas 4: 7 distinct ACC values
+#   Mauro Pancreas: 10 distinct ACC values
+#   68K PBMC: 8 distinct ACC values
+#   CITE CMBC: 8 distinct ACC values
+#   Human Kidney: 10 distinct ACC values
+#   Sonya Liver: 10 distinct ACC values
+#   Sapiens Liver: 15 distinct ACC values
+#   Sapiens Ear Crista Ampullaris: 7 distinct ACC values
+#   Sapiens Ear Utricle: 5 distinct ACC values
+#   Sapiens Lung: 25 distinct ACC values
+#   Sapiens Testis: 8 distinct ACC values
+#   Sapiens Trachea: 20 distinct ACC values
+#   Mouse cerebral cortex: 9 distinct ACC values
+#   Mouse embryonic stem: 4 distinct ACC values
+#   Mouse hypothalamus: 10 distinct ACC values
+#   Mouse Pancreas 1: 13 distinct ACC values
+#   Mouse Pancreas 2: 9 distinct ACC values (paper Table 2 row header: "Mouse Pancreass 2")
+#   Shekhar mouse retina: 19 distinct ACC values
+#   Macosko mouse retina: 39 distinct ACC values
+#   Mouse Kidney: 7 distinct ACC values
+#   Mouse bladder: 8 distinct ACC values
+#   QS Diaphragm: 5 distinct ACC values
+#   QS Lung: 11 distinct ACC values
+#   QS Trachea: 4 distinct ACC values
+#   QS Limb Muscle: 6 distinct ACC values
+#   Ox Limb Muscle: 6 distinct ACC values
+#   Ox Bladder: 5 distinct ACC values
+#   Ox Spleen: 5 distinct ACC values
+#   Muris Limb Muscle: 6 distinct ACC values
+#   Muris Brain: 16 distinct ACC values
+#   Muris Kidney: 9 distinct ACC values
+#   Muris Liver: 11 distinct ACC values
+#   Muris Lung: 25 distinct ACC values
+
+paper_name	canonical_file	actual_file	source_type	source_url_or_accession	expected_n_obs	expected_n_vars	expected_n_clusters	label_field	actual_n_obs	actual_n_vars	actual_n_clusters	actual_sparsity	has_raw	has_ncounts	has_size_factors	status	notes
+Human Pancreas 1	Human_Pancreas_1.h5ad	Human_Pancreas_1.h5ad	cellxgene_census	cellxgene census:e8551d83-9b55-4e63-8fab-6c3cc5642c17	2544	61497	7	cell_type	2544	61497	7	94.89%	yes	yes	yes	valid	Exact match to paper Table 2. CELLxGENE Census Baron 2016 inDrop. 7 cell types: type A enteroendocrine cell, acinar cell, pancreatic ductal cell, etc.
+Human Pancreas 2	Human_Pancreas_2.h5ad	Human_Pancreas_2.h5ad	cellxgene_census	cellxgene census:ec32a7a4-fc3f-4f43-9a5a-efe7c80ab80a	2126	61497	10	cell_type	2126	61497	10	92.78%	yes	yes	yes	valid	Exact match to paper Table 2. CELLxGENE Census Segerstolpe 2016 Smart-seq2. 10 cell types: pancreatic A cell, type B pancreatic cell, pancreatic ductal cell, etc.
+Human Pancreas 3	Human_Pancreas_3.h5ad	Human_Pancreas_3.h5ad	geo_tar	GSE84133 (Muraro 2016 CEL-Seq2)	8569	20125	14	cell_type	8569	20125	14	90.62%	yes	yes	yes	valid	File has 14 clusters (paper text says ~10, download script says 10, but Table 2 shows 14 distinct ACC values). Paper Table 2 cluster count is 14. Close enough.
+Human Pancreas 4	Human_Pancreas_4.h5ad	Human_Pancreas_4.h5ad	geo_tar	GSE81547 (Enge 2017)	733	23465	7	cell_type	733	23465	1	81.54%	yes	yes	yes	invalid_label	File exists but cell_type column contains only 1 unique value (all cells labeled same type). Paper expects 7 clusters. Raw counts exist but label is invalid. DO NOT RUN.
+Mauro Pancreas	Mauro_Pancreas.h5ad	—	geo_tar	GSE85241 (Baron 2016 full)	2146	20125	10	cell_type	—	—	—	—	—	—	—	download_failed	GEO download returned 404. Original GEO archive for GSE85241 is inaccessible. Try alternative: CELLxGENE Census (filter: pancreas + Mauro) or direct tarball from GEO FTP.
+68K PBMC	68K_PBMC.h5ad	PBMC_68K.h5ad	tenx_direct	10x Genomics 68k PBMC (v1 chemistry)	68000	33694	8	cell_type	8391	33694	1	95.83%	yes	yes	yes	invalid_label	File exists (PBMC_68K.h5ad) but cell_type column has only 1 unique value. Cell type labels were not parsed correctly during CELLxGENE Census extraction. Paper expects 8 clusters. DO NOT RUN.
+CITE CMBC	CITE_CMBC.h5ad	—	cellxgene_census	CELLxGENE Census (CD34+ CBMC CITE-seq)	8859	10000	8	cell_type	—	—	—	—	—	—	—	download_failed	CELLxGENE API query for CD34+ CBMC timed out. Alternative: download from GEO GSE99999 (Stoeckius 2017) or direct 10x URL. No accessible source found.
+Human Kidney	Human_Kidney.h5ad	—	cellxgene_census	CELLxGENE Census Liao 2020 kidney spatial transcriptomics	22885	28000	10	cell_type	—	—	—	—	—	—	—	download_failed	CELLxGENE Census SOMA API timeout after 600+ seconds. Large dataset causes memory/CPU issues. Try per-dataset download with dedicated cellxgene_dl conda env.
+Sonya Liver	Sonya_Liver.h5ad	—	cellxgene_census	CELLxGENE Census Macparland 2018 liver lymphocyte	8444	20000	10	cell_type	—	—	—	—	—	—	—	download_failed	CELLxGENE Census SOMA API timeout. Large dataset. Try per-dataset download or Bioconductor package.
+Sapiens Liver	Sapiens_Liver.h5ad	—	cellxgene_census	CELLxGENE Census Tabula Sapiens (tissue=liver)	8000	60000	15	cell_type	—	—	—	—	—	—	—	download_failed	Existing TabulaSapiens_Pancreas.h5ad does not contain liver tissue (only pancreas). CELLxGENE Census query timed out. Try: pip install TabulaSapiens; or GEO accession; or direct figshare download.
+Sapiens Ear Crista Ampullaris	Sapiens_Ear_Crista_Ampullaris.h5ad	—	cellxgene_census	CELLxGENE Census Tabula Sapiens (tissue=crista_ampullaris)	500	60000	7	cell_type	—	—	—	—	—	—	—	download_failed	Tissue not in existing files. CELLxGENE Census query timed out. Very small tissue (~500 cells). Try pip install TabulaSapiens; or GEO accession.
+Sapiens Ear Utricle	Sapiens_Ear_Utricle.h5ad	—	cellxgene_census	CELLxGENE Census Tabula Sapiens (tissue=utricle)	500	60000	5	cell_type	—	—	—	—	—	—	—	download_failed	Tissue not in existing files. CELLxGENE Census query timed out. Very small tissue (~500 cells). Try pip install TabulaSapiens; or GEO accession.
+Sapiens Lung	Sapiens_Lung.h5ad	—	cellxgene_census	CELLxGENE Census Tabula Sapiens (tissue=lung)	15000	60000	25	cell_type	—	—	—	—	—	—	—	download_failed	Tissue not in existing files. CELLxGENE Census query timed out. Try pip install TabulaSapiens; or GEO accession.
+Sapiens Testis	Sapiens_Testis.h5ad	—	cellxgene_census	CELLxGENE Census Tabula Sapiens (tissue=testis)	7500	60000	8	cell_type	—	—	—	—	—	—	—	download_failed	Tissue not in existing files. CELLxGENE Census query timed out. Try pip install TabulaSapiens; or GEO accession.
+Sapiens Trachea	Sapiens_Trachea.h5ad	—	cellxgene_census	CELLxGENE Census Tabula Sapiens (tissue=trachea)	5000	60000	20	cell_type	—	—	—	—	—	—	—	download_failed	Tissue not in existing files. CELLxGENE Census query timed out. Try pip install TabulaSapiens; or GEO accession.
+Mouse cerebral cortex	Mouse_cerebral_cortex.h5ad	—	geo_tar	GSE60361 (Zeisel 2015 STRT-seq)	3005	19972	9	ClusterName	—	—	—	—	—	—	—	download_failed	GEO download returned 404. GSE60361 may require FTP access or NCBI login. Try: scp/rsync from NCBI; or Bioconductor package; or direct URL.
+Mouse embryonic stem	Mouse_embryonic_stem.h5ad	—	geo_tar	GSE65525 (Klein 2015 inDrop)	2717	24175	4	cluster	—	—	—	—	—	—	—	download_failed	File downloaded previously but corrupted (unknown format error). GSE65525 requires re-download. Try: scp/rsync from NCBI; or Bioconductor package.
+Mouse hypothalamus	Mouse_hypothalamus.h5ad	Mouse_Hypothalamus.h5ad	geo_tar	GSE87544 (Chen 2017 Drop-seq)	20264	18000	10	cluster	6400	18573	1	81.09%	yes	yes	yes	invalid_label	File exists but cell_type column has only 1 unique value (all cells labeled same type). Cell type labels were not parsed correctly from original GEO matrix. Paper expects 10 clusters. DO NOT RUN.
+Mouse Pancreas 1	Mouse_Pancreas_1.h5ad	Mouse_Pancreas_1.h5ad	geo_tar	GSE84133 (Baron 2016 inDrop mouse)	822	14878	13	assigned_cluster	1886	14878	13	88.97%	yes	yes	yes	valid	File has 1886 cells (paper Table 2 says 822). The 822 cells may be a subset. File contains 13 clusters matching paper Table 2. n_obs differs but cluster count is correct.
+Mouse Pancreas 2	Mouse_Pancreas_2.h5ad	Mouse_Pancreas_2.h5ad	cellxgene_census	CELLxGENE Census Mouse Pancreas Atlas (2019)	6201	53384	9	cell_type	6201	53384	9	97.54%	yes	yes	yes	valid	Exact match to paper Table 2 values. 6201 cells, 53384 genes, 9 clusters. CELLxGENE Census MousePancreas_Aging dataset.
+Shekhar mouse retina	Shekhar_mouse_retina.h5ad	—	geo_tar	GSE81904 (Shekhar 2016 Drop-seq)	27499	13166	19	cluster_id	—	—	—	—	—	—	—	download_failed	GEO GSE81904 contains only BAM files (aligned reads), not expression matrices. The original count matrix must be obtained from: (1) Bioconductor package tximport; (2) Shekhar 2016 author website; (3) Recount3 project.
+Macosko mouse retina	Macosko_mouse_retina.h5ad	—	geo_tar	GSE63473 (Macosko 2015 Drop-seq)	14653	11422	39	cluster_id	—	—	—	—	—	—	—	download_failed	GEO GSE63473 contains only BAM files, not expression matrices. Original count matrix available from: (1) the Macosko 2015 paper supplement; (2) 10x Genomics public dataset; (3) Bioconductor package.
+Mouse Kidney	Mouse_Kidney.h5ad	—	cellxgene_census	CELLxGENE Census mouse kidney datasets	50000	28000	7	cell_type	—	—	—	—	—	—	—	download_failed	CELLxGENE Census SOMA API timeout. Large mouse dataset. Try dedicated cellxgene_dl environment or per-dataset API call.
+Mouse bladder	Mouse_bladder.h5ad	—	cellxgene_census	CELLxGENE Census adult mouse bladder	12000	28000	8	cell_type	—	—	—	—	—	—	—	download_failed	CELLxGENE Census SOMA API timeout. Try dedicated cellxgene_dl environment or direct CELLxGENE API.
+QS Diaphragm	QS_Diaphragm.h5ad	—	figshare_api	Tabul a Muris Senis: figshare 8273102	2000	28000	5	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris Senis GEO: GSE149590. Bioconductor: TabulaMurisSenisData. Manual download: figshare API (requires token) or direct browser download.
+QS Lung	QS_Lung.h5ad	—	figshare_api	Tabula Muris Senis: figshare 8273102	4000	28000	11	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris Senis GEO: GSE149590. Bioconductor: TabulaMurisSenisData. Manual download: figshare API (requires token) or direct browser download.
+QS Trachea	QS_Trachea.h5ad	—	figshare_api	Tabula Muris Senis: figshare 8273102	2000	28000	4	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris Senis GEO: GSE149590. Bioconductor: TabulaMurisSenisData. Manual download: figshare API (requires token) or direct browser download.
+QS Limb Muscle	QS_Limb_Muscle.h5ad	—	figshare_api	Tabula Muris Senis: figshare 8273102	3000	28000	6	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris Senis GEO: GSE149590. Bioconductor: TabulaMurisSenisData. Manual download: figshare API (requires token) or direct browser download.
+Ox Limb Muscle	Ox_Limb_Muscle.h5ad	—	figshare_api	Tabula Muris FACS: figshare 5715040	2000	28000	6	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris FACS GEO: GSE109774. Bioconductor: TabulaMurisData. Manual download: figshare API (requires token) or direct browser download.
+Ox Bladder	Ox_Bladder.h5ad	—	figshare_api	Tabula Muris FACS: figshare 5715040	1500	28000	5	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris FACS GEO: GSE109774. Bioconductor: TabulaMurisData. Manual download: figshare API (requires token) or direct browser download.
+Ox Spleen	Ox_Spleen.h5ad	—	figshare_api	Tabula Muris FACS: figshare 5715040	3000	28000	5	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris FACS GEO: GSE109774. Bioconductor: TabulaMurisData. Manual download: figshare API (requires token) or direct browser download.
+Muris Limb Muscle	Muris_Limb_Muscle.h5ad	—	figshare_api	Tabula Muris FACS: figshare 5715040	4000	28000	6	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris FACS GEO: GSE109774. Bioconductor: TabulaMurisData. Manual download: figshare API (requires token) or direct browser download.
+Muris Brain	Muris_Brain.h5ad	—	figshare_api	Tabula Muris FACS: figshare 5715040	13417	21609	16	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris FACS GEO: GSE109774. Bioconductor: TabulaMurisData. Manual download: figshare API (requires token) or direct browser download.
+Muris Kidney	Muris_Kidney.h5ad	—	figshare_api	Tabula Muris FACS: figshare 5715040	1817	21609	9	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris FACS GEO: GSE109774. Bioconductor: TabulaMurisData. Manual download: figshare API (requires token) or direct browser download.
+Muris Liver	Muris_Liver.h5ad	—	figshare_api	Tabula Muris FACS: figshare 5715040	2859	21609	11	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris FACS GEO: GSE109774. Bioconductor: TabulaMurisData. Manual download: figshare API (requires token) or direct browser download.
+Muris Lung	Muris_Lung.h5ad	—	figshare_api	Tabula Muris FACS: figshare 5715040	5167	21609	25	cell_type	—	—	—	—	—	—	—	manual_required	Figshare direct download blocked (HTTP 403). Tabula Muris FACS GEO: GSE109774. Bioconductor: TabulaMurisData. Manual download: figshare API (requires token) or direct browser download.

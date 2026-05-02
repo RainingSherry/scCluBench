@@ -1,0 +1,11 @@
+# Foundation Models for scRNA-seq Analysis
+# Install with: pip install -r requirements.txt
+
+# scGPT - Single-cell GPT for cell type annotation and gene expression prediction
+scgpt
+
+# Geneformer - Transformer model for single-cell biology
+geneformer
+
+# GeneCompass - Foundation model for single-cell analysis
+git+https://github.com/xCompass-AI/GeneCompass.git

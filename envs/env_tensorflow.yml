@@ -1,0 +1,21 @@
+name: scclubench-tf
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - pip
+  - tensorflow>=2.10
+  - keras
+  - numpy
+  - scipy
+  - scikit-learn
+  - pandas
+  - matplotlib
+  - seaborn
+  - h5py
+  - scanpy
+  - anndata
+  - leidenalg
+  - munkres
+  - tqdm
